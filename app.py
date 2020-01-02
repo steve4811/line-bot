@@ -38,7 +38,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    if msg in ['hi' ,'Hi' ,'HI'] :
+    if msg in ['hi' ,'Hi' ,'HI' ,'嗨'] :
         r = '嗨'
     elif msg == '你是誰' :
         r = '我是機器人'
