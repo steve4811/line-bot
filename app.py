@@ -7,7 +7,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,StickerSendMessage
+    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,
+    StickerSendMessage,LocationSendMessage
 )
 
 app = Flask(__name__)
@@ -45,6 +46,15 @@ def handle_message(event):
         )
         line_bot_api.reply_message(
         event.reply_token, sticker_message)
+    elif '地址' in msg or '地點' in msg :
+        location_message = LocationSendMessage (
+            title = '101大樓' ,
+            address = '台北市信義路五段7號' ,
+            latitude = 25.034207 ,
+            longitude = 121.564590
+            )
+        line_bot_api.reply_message(
+        event.reply_token, location_message)
         return 
 
     if msg in ['hi' ,'Hi' ,'HI' ,'嗨'] :
