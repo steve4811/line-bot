@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,
-    StickerSendMessage,LocationSendMessage
+    StickerSendMessage,LocationSendMessage,QuickReplyBotton
 )
 
 app = Flask(__name__)
@@ -55,6 +55,24 @@ def handle_message(event):
             )
         line_bot_api.reply_message(
         event.reply_token, location_message)
+    elif '語言' in msg :
+        botton_message = TextSendMessage(
+            text = '選擇電腦語言' ,
+            quick_reply = QuickReply(
+                items =[
+                QuickReplyBotton(
+                    action = MessageAction (label = "Python" ,
+                        text= "Python")
+                    ),
+                QuickReplyBotton(
+                    action = MessageAction (label = "Java" ,
+                        text= "Java")
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(
+        event.reply_token, botton_message)
         return 
 
     if msg in ['hi' ,'Hi' ,'HI' ,'嗨'] :
