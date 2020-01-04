@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,StickersendMessage
+    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -37,10 +37,6 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    #image_message = ImageSendMessage(
-    #original_content_url='https://line-bot-1231.herokuapp.com/callback/pasta.png',
-    #preview_image_url='https://line-bot-1231.herokuapp.com/callback/pasta.png'
-    # )
     msg = event.message.text
     if '圖片' in msg :
         sticker_message = StickerSendMessage(
