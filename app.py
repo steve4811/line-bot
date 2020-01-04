@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,
-    StickerSendMessage,LocationSendMessage,QuickReplyBotton
+    StickerSendMessage,LocationSendMessage
 )
 
 app = Flask(__name__)
