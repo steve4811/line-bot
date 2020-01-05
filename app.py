@@ -6,10 +6,7 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,
-    StickerSendMessage,LocationSendMessage,TemplateSendMessage,BottomsTemplate
-)
+from linebot.models import *
 
 app = Flask(__name__)
 
@@ -56,28 +53,32 @@ def handle_message(event):
         line_bot_api.reply_message(
         event.reply_token, location_message)
     elif '語言' in msg :
-        buttons_template_message = TemplateSendMessage(
-        alt_text='樣版 ：',
+        buttons_template = TemplateSendMessage(
+        alt_text='目錄 template',
         template=ButtonsTemplate(
-        title='Menu',
-        text='請選擇',
-        actions=[
-            PostbackAction(
-                label='postback',
-                display_text='Python',
-                data='action=buy&itemid=1'
-            ),
-            MessageAction(
-                label='message',
-                text='message text'
-            ),
-            URIAction(
-                label='uri',
-                uri='http://example.com/')
-            ])
+            title='Template-樣板介紹',
+            text='Template分為四種，也就是以下四種：',
+            actions=[
+                MessageTemplateAction(
+                    label='Buttons Template',
+                    text='Buttons Template'
+                ),
+                MessageTemplateAction(
+                    label='Confirm template',
+                    text='Confirm template'
+                ),
+                MessageTemplateAction(
+                    label='Carousel template',
+                    text='Carousel template'
+                ),
+                MessageTemplateAction(
+                    label='Image Carousel',
+                    text='Image Carousel'
+                )
+            ]
         )
-        line_bot_api.reply_message(
-        event.reply_token, text)
+    )
+        line_bot_api.reply_message(event.reply_token, buttons_template)
         return 
 
     if msg in ['hi' ,'Hi' ,'HI' ,'嗨'] :
